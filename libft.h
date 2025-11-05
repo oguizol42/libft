@@ -6,13 +6,14 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 12:03:10 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/04 14:31:12 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/05 18:02:22 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
 
 int		ft_isalpha(int c);

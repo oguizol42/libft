@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 17:49:23 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/05 18:05:42 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/05 16:59:42 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/05 17:16:32 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isascii(int c)
 {
-	size_t	count;
-
-	count = 0;
-	while (*s != '\0')
-	{
-		++s;
-		++count;
-	}
-	return (count);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
 
 /*
-int	main(int argc, char **argv)
+int	main(void)
 {
-	if (argc > 1)
-		printf("%zu\n", ft_strlen(argv[1]));
-	return (0);
+	if (ft_isascii(-5))
+		write (1, "VRAI\n", 5);
+	else
+		write (1, "FAUX\n", 5);
+	if (ft_isascii(0))
+		write (1, "VRAI\n", 5);
+	else
+		write (1, "FAUX\n", 5);
+	if (ft_isascii(5))
+		write (1, "VRAI\n", 5);
+	else
+		write (1, "FAUX\n", 5);
+	if (ft_isascii('A'))
+		write (1, "VRAI\n", 5);
+	else
+		write (1, "FAUX\n", 5);
 }
 */

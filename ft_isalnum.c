@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 17:49:23 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/05 18:05:42 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/05 16:44:24 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/05 16:57:48 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isalnum(int c)
 {
-	size_t	count;
-
-	count = 0;
-	while (*s != '\0')
-	{
-		++s;
-		++count;
-	}
-	return (count);
+	if ((c >= '0' && c <= '9')
+		|| (c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
 }
 
 /*
-int	main(int argc, char **argv)
+#include <stdio.h>
+int	main(void)
 {
-	if (argc > 1)
-		printf("%zu\n", ft_strlen(argv[1]));
-	return (0);
+	int	l = 1;
+
+	while (l != EOF)
+	{
+		write (1, "Entrez un caractere: ", 21);
+		l = getchar();
+		if (ft_isalnum(l))
+			write (1, "\nBien\n", 6);
+		else
+			write (1, "\nPas bien\n", 10);
+		getchar();
+	}
 }
 */
