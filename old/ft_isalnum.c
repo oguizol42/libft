@@ -1,43 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 18:14:14 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/06 15:59:31 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/05 16:44:24 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/05 16:57:48 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_isalnum(int c)
 {
-	unsigned char	*chg;
-	size_t			i;
-
-	i = 0;
-	chg = s;
-	while (i < n)
-	{
-		chg[i] = (unsigned char)c;
-		++i;
-	}
-	return (s);
+	if ((c >= '0' && c <= '9')
+		|| (c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
 }
 
 /*
+#include <stdio.h>
 int	main(void)
 {
-	void	*b;
-	int		i;
-	char	a[] = "Salut TA";
+	int	l = 1;
 
-	i = 0;
-	printf ("\nAvant: %s", a);
-	b = ft_memset(a, 'F', 3);
-	printf ("\nApres: %s", (char *)b);
-	return (0);
+	while (l != EOF)
+	{
+		write (1, "Entrez un caractere: ", 21);
+		l = getchar();
+		if (ft_isalnum(l))
+			write (1, "\nBien\n", 6);
+		else
+			write (1, "\nPas bien\n", 10);
+		getchar();
+	}
 }
 */

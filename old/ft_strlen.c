@@ -1,43 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 18:14:14 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/06 15:59:31 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/05 17:49:23 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/05 18:05:42 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+size_t	ft_strlen(const char *s)
 {
-	unsigned char	*chg;
-	size_t			i;
+	size_t	count;
 
-	i = 0;
-	chg = s;
-	while (i < n)
+	count = 0;
+	while (*s != '\0')
 	{
-		chg[i] = (unsigned char)c;
-		++i;
+		++s;
+		++count;
 	}
-	return (s);
+	return (count);
 }
 
 /*
-int	main(void)
+int	main(int argc, char **argv)
 {
-	void	*b;
-	int		i;
-	char	a[] = "Salut TA";
-
-	i = 0;
-	printf ("\nAvant: %s", a);
-	b = ft_memset(a, 'F', 3);
-	printf ("\nApres: %s", (char *)b);
+	if (argc > 1)
+		printf("%zu\n", ft_strlen(argv[1]));
 	return (0);
 }
 */

@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 18:14:14 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/06 15:59:31 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/05 19:41:23 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*chg;
-	size_t			i;
+	size_t	i;
 
 	i = 0;
 	chg = s;

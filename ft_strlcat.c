@@ -3,147 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oguizol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 16:55:00 by oguizol           #+#    #+#             */
-/*   Updated: 2025/07/31 20:54:12 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/06 14:56:52 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/06 15:57:58 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	unsigned int	i;
-	unsigned int	j;
+	size_t	length;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0' && i < (size - 1))
-		++i;
-	while (src[j] != '\0' && i < (size - 1))
+	length = 0;
+	while (*dst != '\0')
 	{
-		dest[i] = src[j];
-		++i;
-		++j;
+		++dst;
+		++length;
+		--size;
 	}
-	dest[i] = '\0';
-	return (i);
+	while ((size > 1) && (*src != '\0'))
+	{
+		*dst = *src;
+		++dst;
+		++src;
+		++length;
+		--size;
+	}
+	*dst = '\0';
+	while (*src != '\0')
+	{
+		++src;
+		++length;
+	}
+	return (length);
 }
+
 /*
-int	puissance(int nbr, int puiss)
+int	main (void)
 {
-	int	result;
+	char	src[] = "Au revoir";
+	char	dest1[25] = "Bonjour, ";
+	char	*dest2;
+	size_t	length;
 
-	result = nbr;
-	if (puiss > 0)
-	{
-		while (puiss > 1)
-		{
-			result *= nbr;
-			--puiss;
-		}
-	}
-	else
-		return (1);
-	return (result);
-}
+	length = 0;
+	dest2 = (char *) malloc (sizeof(char) * 15);
+	printf("ESSAI1: src: %s, dest: %s", src, dest1);
+	length = ft_strlcat(dest1, src, 25);
+	printf("\nApres strlcat:\nsrc: %s, dest: %s", src, dest1);
+	printf("\nLongueur: %zu\n", length);
 
-int	compte(int nbr)
-{
-	int	compt;
-
-	compt = 0;
-	while (nbr / 10)
-	{
-		++compt;
-		nbr /= 10;
-	}
-	return (compt);
-}
-
-void	ft_putnbr(int nb)
-{
-	char	aff;
-	int		compt;
-	int		div;
-	int		nbrtmp;
-
-	if (nb > 0)
-	{
-		compt = compte (nb);
-		while (compt >= 0)
-		{
-			nbrtmp = nb;
-			div = puissance (10, compt);
-			nbrtmp = nb / div;
-			aff = (nbrtmp % 10) + '0';
-			write (1, &aff, 1);
-			--compt;
-		}
-	}
-	else
-	{
-		aff = 0 + '0';
-		write (1, &aff, 1);
-	}
-}
-
-void	ft_putstr(char *str)
-{
-	char	test;
-
-	test = '\0';
-	while ((*str) != test)
-	{
-		write(1, str, 1);
-		++str;
-	}
-}
-int	main(void)
-{
-	unsigned int	retour;
-	char	chaine1[100] = "Salut ";
-	char	chaine2[100] = "les copains !!!!!";
-	char	chaine3[100] = " Comment vas ?";
-
-	ft_putstr(chaine1);
-	write (1, "\n", 2);
-	ft_putstr(chaine3);
-        write (1, "\n", 2);
-	retour = ft_strlcat(chaine1, chaine3, 100);
-	ft_putnbr(retour);	
-        write (1, "\n", 2);
-	ft_putstr(chaine1);
-        write (1, "\n", 2);
-        ft_putstr(chaine3);
-        write (1, "\n", 2);
-	write (1, "\n", 2);
-
-	ft_putstr(chaine1);
-        write (1, "\n", 2);
-        ft_putstr(chaine2);
-        write (1, "\n", 2);
-        retour = ft_strlcat(chaine1, chaine2, 5);
-        ft_putnbr(retour);
-        write (1, "\n", 2);
-        ft_putstr(chaine1);
-        write (1, "\n", 2);
-        ft_putstr(chaine2);
-        write (1, "\n", 2);
-        write (1, "\n", 2);
-
-	ft_putstr(chaine1);
-        write (1, "\n", 2);
-        ft_putstr(chaine3);
-        write (1, "\n", 2);
-        retour = ft_strlcat(chaine1, chaine3, 100);
-        ft_putnbr(retour);
-        write (1, "\n", 2);
-        ft_putstr(chaine1);
-        write (1, "\n", 2);
-        ft_putstr(chaine3);
-        write (1, "\n", 2);
-        write (1, "\n", 2);
+	ft_strlcpy(dest2, "Bonjour, ", 15);
+	length = 0;
+	printf("ESSAI2: src: %s, dest: %s", src, dest2);
+	length = ft_strlcat(dest2, src, 15);
+	printf("\nApres strlcat:\nsrc: %s, dest: %s", src, dest2);
+	printf("\nLongueur: %zu\n", length);
+	free (dest2);
 	return (0);
-}*/
+}
+*/

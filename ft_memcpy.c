@@ -1,43 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 18:14:14 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/06 15:59:31 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/06 09:48:40 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/06 11:48:22 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned char	*chg;
-	size_t			i;
+	const unsigned char	*news;
+	unsigned char		*newd;
 
-	i = 0;
-	chg = s;
-	while (i < n)
+	newd = dest;
+	news = src;
+	while (n > 0)
 	{
-		chg[i] = (unsigned char)c;
-		++i;
+		*newd = *news;
+		++newd;
+		++news;
+		--n;
 	}
-	return (s);
+	return (dest);
 }
 
 /*
 int	main(void)
 {
-	void	*b;
-	int		i;
-	char	a[] = "Salut TA";
+	unsigned char	aff[] = "ABCDEF";
+	unsigned char	*aff2;
 
-	i = 0;
-	printf ("\nAvant: %s", a);
-	b = ft_memset(a, 'F', 3);
-	printf ("\nApres: %s", (char *)b);
+	aff2 = NULL;
+	printf ("Avant: %s", aff);
+	aff2 = ft_memcpy(aff, "EFGHIJ", 3);
+	printf ("\nApres: %s", aff);
+	printf ("\nApres2: %s", aff2);
 	return (0);
 }
 */
