@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 10:31:41 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/07 10:38:30 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/07 11:49:21 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/07 12:30:59 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i;
+	unsigned char	*scr;
+	unsigned char	ch;
+	void			*scrv;
+	size_t			i;
 
+	scr = (unsigned char *)s;
+	ch = (unsigned char)c;
 	i = 0;
-	while ((s[i] != '\0') && (s[i] != (unsigned char)c))
+	while (i < n)
+	{
+		if (scr[i] == ch)
+		{
+			scrv = &scr[i];
+			return (scrv);
+		}
 		++i;
-	if (s[i] == (unsigned char)c)
-		return ((char *)(&s[i]));
+	}
 	return (NULL);
 }
 
@@ -29,13 +39,18 @@ int	main(int argc, char **argv)
 {
 	char	*result;
 	int		c;
+	int		size;
 
 	result = NULL;
+	size = 0;
+	c = 0;
 	if (argc > 2)
 	{
 		c = *argv[2];
 		printf("\nChaine: %s\nOccurence: %c\n", argv[1], c);
-		result = ft_strchr(argv[1], c);
+		printf("Nombre d'octets de recherche: ");
+		scanf("%d", &size);
+		result = ft_memchr(argv[1], c, size);
 		if (result != NULL)
 			printf("Retour chaine occurence: %s\n", result);
 		else

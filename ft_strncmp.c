@@ -3,112 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oguizol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 11:21:40 by oguizol           #+#    #+#             */
-/*   Updated: 2025/07/17 20:54:34 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/07 11:11:08 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/07 11:45:39 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	if (n == 0)
 		return (0);
 	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i] && i < n)
-	{
 		++i;
-	}
 	if (i == n)
 		--i;
 	return (s1[i] - s2[i]);
 }
+
 /*
-int	puissance(int nbr, int puiss)
+int	main(int argc, char **argv)
 {
-	int	result;
+	int		c;
 
-	result = nbr;
-	if (puiss > 0)
+	c = 0;
+	if (argc > 2)
 	{
-		while (puiss > 1)
-		{
-			result *= nbr;
-			--puiss;
-		}
+		printf("\nChoisissez le nombre de caracteres testes: ");
+		scanf("%d", &c);
+		printf("\nPremiere chaine: %s", argv[1]);
+		printf("\nDeuxieme chaine: %s", argv[2]);
+		printf("\nResultat: %d\n", ft_strncmp(argv[1], argv[2], c));
 	}
-	else
-		return (1);
-	return (result);
-}
-
-int	compte(int nbr)
-{
-	int	compt;
-
-	compt = 0;
-	while (nbr / 10)
-	{
-		++compt;
-		nbr /= 10;
-	}
-	return (compt);
-}
-
-
-void	ft_putnbr(int nb)
-{
-	char	aff;
-	int		compt;
-	int		div;
-	int		nbrtmp;
-
-	if (nb > 0)
-	{
-		compt = compte (nb);
-		while (compt >= 0)
-		{
-			nbrtmp = nb;
-			div = puissance (10, compt);
-			nbrtmp = nb / div;
-			aff = (nbrtmp % 10) + '0';
-			write (1, &aff, 1);
-			--compt;
-		}
-	}
-	else
-	{
-		aff = 0 + '0';
-		write (1, &aff, 1);
-	}
-}
-int	main(void)
-{
-	char	chaine1[] = "bonjour";
-	char    chaine2[] = "bonsoir";
-	//char    chaine3[] = "bon";
-	
-	if (ft_strncmp(chaine1, chaine2, 3) >= 0)
-		ft_putnbr(ft_strncmp(chaine1, chaine2, 3));
-	else
-	{
-		write(1, "-", 1);
-		ft_putnbr(ft_strncmp(chaine1, chaine2, 3) * -1);
-	}
-	write (1, "\n", 2);
-	
-	if (ft_strncmp(chaine1, chaine2, 4) >= 0)
-                ft_putnbr(ft_strncmp(chaine1, chaine2, 4));
-        else
-        {
-                write(1, "-", 1);
-                ft_putnbr(ft_strncmp(chaine1, chaine2, 4) * -1);
-        }
-        write (1, "\n", 2);
-
 	return (0);
-}*/
+}
+*/

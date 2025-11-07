@@ -1,45 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 10:31:41 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/07 10:38:30 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/07 13:05:18 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/07 13:18:08 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*sch1;
+	unsigned char	*sch2;
 
 	i = 0;
-	while ((s[i] != '\0') && (s[i] != (unsigned char)c))
+	sch1 = (unsigned char *)s1;
+	sch2 = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while ((sch1[i] == sch2[i]) && (i < n))
 		++i;
-	if (s[i] == (unsigned char)c)
-		return ((char *)(&s[i]));
-	return (NULL);
+	if (i == n)
+		--i;
+	return (sch1[i] - sch2[i]);
 }
 
 /*
 int	main(int argc, char **argv)
 {
-	char	*result;
 	int		c;
 
-	result = NULL;
+	c = 0;
 	if (argc > 2)
 	{
-		c = *argv[2];
-		printf("\nChaine: %s\nOccurence: %c\n", argv[1], c);
-		result = ft_strchr(argv[1], c);
-		if (result != NULL)
-			printf("Retour chaine occurence: %s\n", result);
-		else
-			printf("Occurence non trouvee\n");
+		printf("\nChoisissez le nombre de caracteres testes: ");
+		scanf("%d", &c);
+		printf("\nPremiere chaine: %s", argv[1]);
+		printf("\nDeuxieme chaine: %s", argv[2]);
+		printf("\nResultat: %d\n", ft_memcmp(argv[1], argv[2], c));
 	}
 	return (0);
 }

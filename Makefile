@@ -6,7 +6,7 @@
 #    By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 14:48:23 by oguizol           #+#    #+#              #
-#    Updated: 2025/11/06 12:05:16 by oguizol          ###   ########.fr        #
+#    Updated: 2025/11/07 15:48:05 by oguizol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,14 @@ SRC = ft_isalpha.c \
 	  ft_memmove.c \
 	  ft_strlcpy.c \
 	  ft_strlcat.c \
-
 	  ft_toupper.c \
 	  ft_tolower.c \
 	  ft_strchr.c \
+	  ft_strrchr.c \
+	  ft_strncmp.c \
+	  ft_memchr.c \
+	  ft_memcmp.c \
+	  ft_strnstr.c \
 
 OBJ = $(SRC:.c=.o)
 
