@@ -3,69 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oguizol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/16 19:12:59 by oguizol           #+#    #+#             */
-/*   Updated: 2025/07/24 10:47:02 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/07 18:53:39 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/07 20:46:01 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-char	*find_digi(char *str, int *sign)
+int	ft_atoi(const char *nptr)
 {
+	int	nbr;
+	int	sign;
 	int	i;
 
-	i = 0;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		++str;
-	while (*str == '+' || *str == '-')
-	{
-		if (str[i] == '-')
-			*sign = (*sign) * -1;
-		++str;
-	}
-	return (str);
-}
-
-int	convert_to_digit(char *str)
-{
-	int	nbr;
-
-	nbr = *str - '0';
-	++str;
-	while (*str >= '0' && *str <= '9' && *str != '\0')
-	{
-		nbr = nbr * 10 + (*str - '0');
-		++str;
-	}
-	return (nbr);
-}
-
-int	ft_atoi(char *str)
-{
-	int		nbr;
-	int		sign;
-	char	*begin_dig;
-
-	nbr = 0;
 	sign = 1;
-	begin_dig = find_digi(str, &sign);
-	if (*begin_dig >= '0' && *begin_dig <= '9')
+	nbr = 0;
+	i = 0;
+	while ((nptr[i] == ' ') || ((nptr[i] >= 9) && (nptr[i] <= 13)))
+		++i;
+	if ((nptr[i] == '+') || (nptr[i] == '-'))
 	{
-		nbr = convert_to_digit (begin_dig);
-		nbr = nbr * sign;
+		if (nptr[i] == '-')
+			sign *= -1;
+		++i;
 	}
-	return (nbr);
+	while ((nptr[i] >= '0') && (nptr[i] <= '9'))
+	{
+		nbr = (10 * nbr) + (nptr[i] - '0');
+		++i;
+	}
+	return (nbr * sign);
 }
+
 /*
-int	main (int n, char **str)
+int	main(int argc, char **argv)
 {
-	int	nbr;
-	
-	nbr = 0;	
-	if(n == 2)
-		nbr = ft_atoi(str[1]);
-	ft_putnbr(nbr);
+	if (argc > 1)
+	{
+		printf("\nChaine envoyee: %s\n", argv[1]);
+		printf("Valeur de retour: %d\n", (ft_atoi(argv[1])));
+	}
 	return (0);
-}*/
+}
+*/
