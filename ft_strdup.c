@@ -1,66 +1,47 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: oguizol <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:33:07 by oguizol           #+#    #+#             */
-/*   Updated: 2025/07/23 15:26:59 by oguizol          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "libft.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *s)
 {
-	char	*copy;
+	char	*dupli;
 	int		i;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (s[i] != '\0')
 		++i;
-	copy = malloc (sizeof(char) * (i + 1));
-	if (copy != NULL)
+	dupli = malloc (sizeof(char) * (i + 1));
+	if (dupli)
 	{
 		i = 0;
-		while (src[i] != '\0')
+		while (s[i] != '\0')
 		{
-			copy[i] = src[i];
+			dupli[i] = s[i];
 			++i;
 		}
-		copy[i] = '\0';
-		return (copy);
+		dupli[i] = '\0';
 	}
-	return (NULL);
+	else
+		errno = ENOMEM;
+	return (dupli);
 }
+
 /*
-void	ft_putstr(char *str)
+int	main(int argc, char **argv)
 {
-	char	test;
-
-	test = '\0';
-	while ((*str) != test)
+	char	*dupli;
+	
+	dupli = NULL;
+	if (argc > 1)
 	{
-		write(1, str, 1);
-		++str;
+		printf("Chaine source:    %s\n", argv[1]);
+		dupli = ft_strdup(argv[1]);
+		if (dupli)
+			printf("Chaine dupliquee: %s\n", dupli);
+		else if (errno == ENOMEM)
+			printf("Pas assez d'espace memoire pour la duplication");
+		else
+			printf("Duplication echouee\n");
 	}
-}
-
-int	main (int argc, char **argv)
-{
-	char	*copy;
-
-	copy = NULL;
-	if (argc == 2)
-	{
-			copy = ft_strdup(argv[1]);
-			ft_putstr(argv[1]);
-			write (1, "\n", 1);
-			ft_putstr(copy);
-	}
-	free (copy);
-	copy = NULL;
+	free (dupli);
 	return (0);
-}*/
+}
+*/

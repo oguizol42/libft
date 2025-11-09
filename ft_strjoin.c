@@ -1,112 +1,37 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: oguizol <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 17:32:45 by oguizol           #+#    #+#             */
-/*   Updated: 2025/07/24 19:16:32 by oguizol          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "libft.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-
-char	*ft_strcat(char *dest, char *src)
+char *ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
-	int	j;
+	char	*sconc;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		++i;
-	while (src[j] != '\0')
+	sconc = NULL;
+	sconc = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if(sconc)
 	{
-		dest[i] = src[j];
-		++i;
-		++j;
+		ft_strlcpy(sconc, s1, (ft_strlen(s1) + 1));
+		ft_strlcat(sconc, s2, (ft_strlen(s1) + ft_strlen(s2) + 1));
 	}
-	dest[i + 1] = '\0';
-	return (dest);
+	return (sconc);
 }
 
-int	ft_strlen(char *str)
-{
-	char	test;
-	int		count;
-
-	count = 0;
-	test = '\0';
-	if ((*str) != test)
-	{
-		while ((*str) != test)
-		{
-			++count;
-			++str;
-		}
-	}
-	return (count);
-}
-
-void	multi_cat(int size, char *cat, char **strs, char *sep)
-{
-	int	i;
-
-	i = 0;
-	cat[0] = '\0';
-	while (i < (size - 1))
-	{
-		ft_strcat(cat, strs[i]);
-		ft_strcat(cat, sep);
-		++i;
-	}
-	ft_strcat(cat, strs[size - 1]);
-}
-
-char	*ft_strjoin(int size, char **strs, char *sep)
-{
-	char	*cat;
-	int		size_total;
-	int		i;
-
-	cat = NULL;
-	if (size == 0)
-	{
-		cat = malloc (sizeof(char));
-		*cat = '\0';
-		return (cat);
-	}
-	i = 0;
-	size_total = ((size - 1) * ft_strlen (sep)) + 1;
-	while (i < size)
-	{
-		size_total += ft_strlen(strs[i]);
-		++i;
-	}
-	cat = malloc (sizeof(char) * size_total);
-	if (cat)
-		multi_cat (size, cat, strs, sep);
-	return (cat);
-}
 /*
 int	main(int argc, char **argv)
 {
-	char	*ret;
+	char	*sconc;
 
-	ret = NULL;
+	sconc = NULL;
 	if (argc > 1)
 	{
-		print_strs_test((argc - 1), &argv[1], " ,???..., ");
-		ret = ft_strjoin((argc - 1), &argv[1], " ,???..., ");
-	}
-	if (ret)
-	{
-		write (1, "\nChaine retournee :\n", 20);
-		ft_putstr(ret);
-	}
+		printf("Chaine1: %s\n", argv[1]);
+		printf("Chaine2: %s\n", argv[2]);
+		sconc = ft_strjoin(argv[1], argv[2]);
+		if (sconc)
+			printf("\nChaine retour: %s\n", sconc);
+		else
+			printf("\nProbleme d'allocation\n");
 
-	free (ret);
+
+	}
 	return (0);
-}*/
+}
+*/
