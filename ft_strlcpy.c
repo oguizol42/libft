@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 12:04:20 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/06 12:50:11 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/09 12:54:48 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,42 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	i;
 
 	i = 0;
-	while ((src[i] != '\0') && (i < (size - 1)))
+	if (size > 0)
 	{
-		dst[i] = src[i];
-		++i;
+		while ((src[i] != '\0') && (i < (size - 1)))
+		{
+			dst[i] = src[i];
+			++i;
+		}
+		dst[i] = '\0';
 	}
-	dst[i] = '\0';
 	while (src[i] != '\0')
 		++i;
 	return (i);
 }
 
 /*
-int	main(void)
+int	main(int argc, char **argv)
 {
-	char	dest1[4];
-	char	dest2[20];
 	size_t	size;
-
-	size = ft_strlcpy(dest1, "bonjour", 4);
-	printf("\n\nCopie du mot bonjour ");
-	printf("dans une chaine de taille 4 octets: %s", dest1);
-	printf("\nTaille de la chaine source: %zu", size);
-
-	size = ft_strlcpy(dest2, "bonjour", 20);
-	printf("\n\nCopie du mot bonjour ");
-	printf("dans une chaine de taille 20 octets: %s", dest2);
-	printf("\nTaille de la chaine source: %zu", size);
+	size_t	result;
+	size_t	result2;
+	char	dst[1000];
+	//char	dst2[1000];
+	
+	size = 0;
+	result = 0;
+	result2 = 0;
+	if (argc > 1)
+	{
+		printf("Chaine envoyee: %s\n", argv[1]);
+		printf("Taille du tampon: ");
+		scanf("%zu", &size);
+		result = ft_strlcpy(dst, argv[1], size);
+		//result2 = strlcpy(dst2, argv[1], size);
+		printf("\nTaille de la chaine avec ft_strlcpy: %zu\n", result);
+		printf("Chaine dest avec ft_strlcpy: %s\n", dst);
+	}
 	return (0);
 }
 */

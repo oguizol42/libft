@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 10:46:07 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/09 18:42:14 by oguizol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -6,22 +18,22 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	size_t	i;
 
 	i = 0;
-	if (nmemb > (SIZE_MAX / size))
-	{
-		errno = ENOMEM;
-		return (0);
-	}
 	if ((nmemb == 0) || (size == 0))
 		return (malloc (0));
-	if ((memalloc = malloc (nmemb * size)))
+	if (nmemb > (SIZE_MAX / size))
+		return (NULL);
+	memalloc = malloc (nmemb * size);
+	if (memalloc)
 	{
 		while (i < (nmemb * size))
 		{
 			((char *)memalloc)[i] = 0;
 			++i;
 		}
+		return (memalloc);
 	}
-	return (memalloc);
+	//return (malloc (0));
+	return (0);
 }
 
 /*
@@ -36,7 +48,7 @@ int	main(void)
 	size = 0;
 	nmemb = 0;
 	i = 0;
-	printf ("Choisissez la taille en octet d'une case memoire max: %zu: ", SIZE_MAX);
+	printf ("Taille max d'une case memoire max: %zu: ", SIZE_MAX);
 	scanf ("%zu", &size);
 	printf ("\nChoisissez le nombre de cases memoire: ");
 	scanf ("%zu", &nmemb);

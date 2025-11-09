@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 10:47:04 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/09 17:42:55 by oguizol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*sconc;
 
 	sconc = NULL;
 	sconc = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if(sconc)
+	if (sconc)
 	{
 		ft_strlcpy(sconc, s1, (ft_strlen(s1) + 1));
 		ft_strlcat(sconc, s2, (ft_strlen(s1) + ft_strlen(s2) + 1));

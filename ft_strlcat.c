@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 14:56:52 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/06 15:57:58 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/09 15:43:45 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/09 17:35:01 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,24 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	length;
+	size_t	dstlen;
+	size_t	srclen;
+	size_t	pos;
 
-	length = 0;
-	while (*dst != '\0')
+	dstlen = 0;
+	srclen = 0;
+	pos = 0;
+	while (dst[dstlen] != '\0')
+		++dstlen;
+	while (src[srclen] != '\0')
+		++srclen;
+	if ((dstlen > size) || size == 0)
+		return (size + srclen);
+	while (((dstlen + pos) < (size - 1)) && (src[pos] != '\0'))
 	{
-		++dst;
-		++length;
-		--size;
+		dst[dstlen + pos] = src[pos];
+		++pos;
 	}
-	while ((size > 1) && (*src != '\0'))
-	{
-		*dst = *src;
-		++dst;
-		++src;
-		++length;
-		--size;
-	}
-	*dst = '\0';
-	while (*src != '\0')
-	{
-		++src;
-		++length;
-	}
-	return (length);
+	dst[dstlen + pos] = '\0';
+	return (dstlen + srclen);
 }
-
-/*
-int	main (void)
-{
-	char	src[] = "Au revoir";
-	char	dest1[25] = "Bonjour, ";
-	char	*dest2;
-	size_t	length;
-
-	length = 0;
-	dest2 = (char *) malloc (sizeof(char) * 15);
-	printf("ESSAI1: src: %s, dest: %s", src, dest1);
-	length = ft_strlcat(dest1, src, 25);
-	printf("\nApres strlcat:\nsrc: %s, dest: %s", src, dest1);
-	printf("\nLongueur: %zu\n", length);
-
-	ft_strlcpy(dest2, "Bonjour, ", 15);
-	length = 0;
-	printf("ESSAI2: src: %s, dest: %s", src, dest2);
-	length = ft_strlcat(dest2, src, 15);
-	printf("\nApres strlcat:\nsrc: %s, dest: %s", src, dest2);
-	printf("\nLongueur: %zu\n", length);
-	free (dest2);
-	return (0);
-}
-*/

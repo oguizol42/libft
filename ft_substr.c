@@ -1,52 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 18:51:37 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/09 19:35:14 by oguizol          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char   cmp;
-	char		*newstr;
-
-	newstr = NULL;
-	cmp = 0;
-	if (s)
+	char	*result;
+	size_t	pos;
+	
+	pos = 0;
+	result = NULL;
+	if (len > 0)
+		result = (char *)malloc(sizeof(char) * (len + 1));
+	if (result)
 	{
-		cmp = (unsigned char)start;
-		while ((*s != '\0') && (*s != cmp))
-			++s;
-		if (ft_strlen(s) < len)
-			len = ft_strlen(s);
-		if ((newstr = (char *)malloc(sizeof(char) * (len + 1))))
+		while ((pos < len) && (s[start + pos] != '\0'))
 		{
-			if (len > 0)
-				ft_strlcpy (newstr, s, (len + 1));
-			else
-				*newstr = '\0';
+			result[pos] = s[start + pos];
+			++pos;
 		}
+		result[pos] = '\0';
 	}
-	return (newstr);
+	return (result);
 }
 
 /*
-int	main(int argc, char **argv)
+int	main(void)
 {
-	size_t	length;
-	char	*sub;
-
-	length = 0;
-	sub = NULL;
-	if (argc > 1)
-	{
-		printf("Chaine:    %s\n", argv[1]);
-		printf("Substring: %s\n", argv[2]);
-		printf("Longueur de la chaine retour ? ");
-		scanf("%zu", &length);
-		sub = ft_substr(argv[1], *argv[2], length);
-		if (sub)
-			printf("\nChaine retour: %s\n", sub);
-		else
-			printf("\nProbleme d'allocation\n");
-
-
-	}
 	return (0);
 }
 */

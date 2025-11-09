@@ -6,7 +6,7 @@
 #    By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 14:48:23 by oguizol           #+#    #+#              #
-#    Updated: 2025/11/07 20:01:42 by oguizol          ###   ########.fr        #
+#    Updated: 2025/11/09 11:54:39 by oguizol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,13 @@ SRC = ft_isalpha.c \
 	  ft_memcmp.c \
 	  ft_strnstr.c \
 	  ft_atoi.c \
+	  ft_calloc.c \
 	  ft_strdup.c \
 	  ft_substr.c \
 	  ft_strjoin.c \
-	  ft_ft_strtrim \
+	  ft_strdup.c \
+	  ft_substr.c \
+	  ft_strjoin.c \
 
 OBJ = $(SRC:.c=.o)
 
