@@ -6,7 +6,7 @@
 #    By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 14:48:23 by oguizol           #+#    #+#              #
-#    Updated: 2025/11/09 11:54:39 by oguizol          ###   ########.fr        #
+#    Updated: 2025/11/10 18:12:41 by oguizol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRC = ft_isalpha.c \
 	  ft_strdup.c \
 	  ft_substr.c \
 	  ft_strjoin.c \
+	  ft_strtrim.c \
+	  ft_split.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -48,6 +50,7 @@ CC = cc
 CFLAGS = -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
+CFLAGS += -g3
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)

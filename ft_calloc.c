@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:46:07 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/09 18:42:14 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/10 11:16:04 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		}
 		return (memalloc);
 	}
-	//return (malloc (0));
 	return (0);
 }
 
