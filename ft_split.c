@@ -6,56 +6,62 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:01:26 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/10 18:23:16 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/11 14:50:42 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	cntarr(char const *s, char c)
+static int	cntspli(char const *s, char c)
 {
 	int	cnt;
 
 	cnt = 0;
-	if (s)
+	if (s && *s != '\0')
 	{
-		cnt = 1;
 		if (c && c != '\0')
 		{
-			while (ft_strchr(s, c))
+			while (*s != '\0')
 			{
-				s = ft_strchr(s, c) + 1;
+				while (*s == c)
+					++s;
 				if (*s != '\0')
 					++cnt;
+				while ((*s != '\0') && (*s != c))
+					++s;
 			}
 		}
+		else
+			++cnt;
 	}
 	return (cnt);
 }
 
-void	fillarr(char **arr, char const *s, char c, int cnt)
+static void	fillarr(char **arr, char const *s, char c, int cnt)
 {
-	char const	*end;
-	int			i;
-	size_t		len;
+	int	i;
+	int	j;
+	int	k;
 
 	if (arr)
 	{
-		end = s;
 		i = 0;
+		j = 0;
+		k = 0;
 		while (i < cnt)
 		{
-			end = ft_strchr(s, c);
-			if (end)
-				len = end - s + 1;
-			else
-				len = ft_strlen(s);
-			arr[i] = ft_substr(s, 0, len);
+			while ((s[j] != '\0') && (s[j] == c))
+				++j;
+			k = j;
+			while ((s[k] != '\0') && (s[k] != c))
+				++k;
+			arr[i] = (char *)malloc(sizeof(char) * (k - j + 1));
 			if (arr[i])
-				s = end + 1;
+				ft_memcpy(arr[i], &s[j], (k - j + 1));
+			arr[i][k - j] = '\0';
+			j = k;
 			++i;
 		}
-		arr[i] = NULL;
 	}
 }
 
@@ -65,10 +71,13 @@ char	**ft_split(char const *s, char c)
 	int		cnt;
 
 	arr = NULL;
-	cnt = cntarr(s, c);
+	cnt = cntspli(s, c);
 	arr = (char **)malloc(sizeof(char *) * (cnt + 1));
 	if (arr)
+	{
 		fillarr (arr, s, c, cnt);
+		arr[cnt] = NULL;
+	}
 	return (arr);
 }
 
