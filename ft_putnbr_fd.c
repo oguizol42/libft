@@ -15,12 +15,16 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	*send;
+	char	*ptr;
 
-	send = ft_itoa(n);
+	ptr = ft_itoa(n);
+	if (!(ptr))
+		return;
+	send = ptr;
 	while (*send != '\0')
 	{
 		write (fd, send, 1);
 		++send;
 	}
-	write (fd, "\0", 1);
+	free(ptr);
 }
