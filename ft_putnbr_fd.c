@@ -26,7 +26,7 @@ void	ft_putnbr_fd(int n, int fd)
 			write (fd, send, 1);
 			++send;
 		}
-		write (fd, "\0", 1);
 		free(ptr);
 	}
 }
+
