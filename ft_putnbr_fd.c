@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:59:25 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/11 20:25:07 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/13 14:45:24 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	ft_putnbr_fd(int n, int fd)
 	char	*ptr;
 
 	ptr = ft_itoa(n);
-	if (!(ptr))
-		return;
-	send = ptr;
-	while (*send != '\0')
+	if (ptr)
 	{
-		write (fd, send, 1);
-		++send;
+		send = ptr;
+		while (*send != '\0')
+		{
+			write (fd, send, 1);
+			++send;
+		}
+		write (fd, "\0", 1);
+		free(ptr);
 	}
-	free(ptr);
 }

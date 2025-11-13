@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:47:04 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/09 17:42:55 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/13 20:53:00 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*sconc;
+	char	*ptrjoin;
 
-	sconc = NULL;
-	sconc = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (sconc)
+	ptrjoin = NULL;
+	if (s1 && s2)
 	{
-		ft_strlcpy(sconc, s1, (ft_strlen(s1) + 1));
-		ft_strlcat(sconc, s2, (ft_strlen(s1) + ft_strlen(s2) + 1));
+		ptrjoin = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+		if (ptrjoin)
+		{
+			ft_strlcpy(ptrjoin, s1, (ft_strlen(s1) + 1));
+			ft_strlcat(ptrjoin, s2, (ft_strlen(s1) + ft_strlen(s2) + 1));
+		}
 	}
-	return (sconc);
+	return (ptrjoin);
 }
 
 /*
@@ -46,4 +49,10 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+		
+	if (s1 && !s2)
+		return (ft_strdup(s1));
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	return (sconc)
 */

@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:47:52 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/11 19:55:15 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/13 16:14:25 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	while (*s != '\0')
+	if (s)
 	{
-		write (fd, s, 1);
-		++s;
+		while (*s != '\0')
+		{
+			write (fd, s, 1);
+			++s;
+		}
+		write (fd, "\n", 1);
 	}
-	write (fd, "\n", 1);
 }

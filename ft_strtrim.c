@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:18:30 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/10 14:30:37 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/13 14:21:43 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 			--end;
 		res = ft_substr(s1, start, (end - start + 1));
 	}
-	else if (s1)
-		res = (char *)s1;
+	if (s1 && !(set))
+		return (ft_strdup(s1));
 	return (res);
 }
 
