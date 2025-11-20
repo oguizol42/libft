@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:46:00 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/20 15:38:03 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/20 12:20:52 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,4 @@ char		*recuparg(char **str, char *argcheck);
 char		*recupstrcut(char **str);
 void		freelst(t_strlist **lst);
 char		*emptystr(void);
-int			mconv(va_list lstarg, t_strlist	*lststr);
-size_t		ft_strlen(const char *s);
-int			argtostr (va_list lstarg, t_strlist *lststr);
 #endif

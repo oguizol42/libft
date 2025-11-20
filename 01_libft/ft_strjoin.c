@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:47:04 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/13 20:53:00 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/19 12:17:05 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptrjoin);
 }
 
-/*
 #include <stdio.h>
 
 int	main(int argc, char **argv)
@@ -74,4 +73,4 @@ int	main(int argc, char **argv)
 
 	return (0);
 }
-*/
+

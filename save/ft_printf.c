@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:44:43 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/20 15:36:06 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/20 12:21:22 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,49 +32,40 @@ void	readlst(t_strlist *lst)
 int	ft_printf(const char *str, ...)
 {
 	t_strlist	*lststr;
-	va_list		lstarg;
 	char		*strcpy;
 	char		*strrecup;
-	int			len;
 
 	strcpy = (char *)str;
 	lststr = NULL;
-	if (!str || (*str == '\0'))
-		return (0);
+	strrecup = NULL;
 	while (strcpy && (*strcpy != '\0'))
 	{
 		strrecup = recupstrcut(&strcpy);
 		addnode(&lststr, strrecup);
 		strrecup = recuparg(&strcpy, "cspdiuxX%");
 		addnode(&lststr, strrecup);
+		//TEMPO
 		if (!strrecup && *strcpy != '\0')
+		{
+			write (1, "PRESENCE D'ARGUMENT INVALIDE DANS LA CHAINE\n", 44);
+			strcpy = NULL;
 			return (0);
+		}
+		//
 	}
-	va_start (lstarg, str);
-	len = mconv (lstarg, lststr);
-	va_end (lstarg);
 	readlst(lststr);
 	freelst(&lststr);
-	return (len);
+	return (0);
 }
-
-
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
 	//char	*strcut;
 	//int	i;
-	int	count;
 
-	count = 0;
 	if (argc <= 1)
 		return (0);
-	if (argc == 1)
-		count = ft_printf(argv[1]);
-	else
-		count = ft_printf(argv[1], argv[2]);
-	printf("\n\n\nTaille de la chaine: %d\n", count);
+	ft_printf(argv[1]);
 	/*
 	while (*argv[1] != '\0')
 	{

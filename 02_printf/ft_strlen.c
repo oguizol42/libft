@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 11:45:39 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/17 11:45:40 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/05 17:49:23 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/20 15:19:22 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+size_t	ft_strlen(const char *s)
 {
-	t_list	*next;
+	size_t	count;
 
-	if (lst)
+	count = 0;
+	while (*s != '\0')
 	{
-		while (*lst)
-		{
-			next = (*lst)->next;
-			del((*lst)->content);
-			free(*lst);
-			*lst = next;
-		}
+		++s;
+		++count;
 	}
+	return (count);
 }
+
+/*
+int	main(int argc, char **argv)
+{
+	if (argc > 1)
+		printf("%zu\n", ft_strlen(argv[1]));
+	return (0);
+}
+*/
