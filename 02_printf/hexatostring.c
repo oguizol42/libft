@@ -34,14 +34,14 @@ char	*hextoa(unsigned int n)
 	str = (char *)malloc(sizeof(char) * (cnt + 1));
 	if (str)
 	{
-		str[cnt - 1] = '\0';
-		while (cnt > 1)
+		str[cnt] = '\0';
+		while (cnt > 0)
 		{
-			str[cnt - 2] = (n % 16);
+			str[cnt - 1] = (n % 16);
 			if ((n % 16) < 10)
-				str[cnt - 2] += '0';
+				str[cnt - 1] += '0';
 			else
-				str[cnt - 2] = str[cnt - 2] - 10 + 'a';
+				str[cnt - 1] = str[cnt - 1] - 10 + 'a';
 			n /= 16;
 			--cnt;
 		}
@@ -49,7 +49,7 @@ char	*hextoa(unsigned int n)
 	return (str);
 }
 
-char	*strtoupp(char *str)
+void	strtoupp(char *str)
 {
 	while (*str != '\0')
 	{
@@ -65,8 +65,8 @@ size_t	hexatostr(va_list lstarg, t_strlist *lststr)
 
 	str = NULL;
 	n = 0;
-	if (((lststr->content)[1]) == 'x')
-		|| (((lststr->content)[1]) == 'X')
+	if ((((lststr->content)[1]) == 'x')
+		|| (((lststr->content)[1]) == 'X'))
 	{
 		n = va_arg(lstarg, unsigned int);
 		if (n == 0)
@@ -74,10 +74,10 @@ size_t	hexatostr(va_list lstarg, t_strlist *lststr)
 		else
 			str = hextoa(n);
 		if (((lststr->content)[1]) == 'X')
-			str = strtoupp(str);
+			strtoupp(str);
 		free (lststr->content);
 		lststr->content = str;
 		return (ft_strlen(str));
 	}
-	return (ft_strlen(str));
+	return (pointtostr(lstarg, lststr));
 }

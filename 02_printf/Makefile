@@ -21,7 +21,8 @@ SRC = ft_printf.c \
 	  ft_itoa.c \
 	  unsiitoa.c \
 	  ft_toupper.c \
-	  hexatostring.c
+	  hexatostring.c \
+	  pointtostring.c
 
 OBJ = $(SRC:.c=.o)
 

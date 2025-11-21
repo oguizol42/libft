@@ -12,21 +12,26 @@
 
 #include "libftprintf.h"
 
-void	readlst(t_strlist *lst)
+int	readlst(t_strlist *lst)
 {
 	char	*str;
+	int		result;
 
 	str = NULL;
+	result = 0;
 	while (lst)
 	{
 		str = lst->content;
 		while (str && *str != '\0')
 		{
-			write(1, str, 1);
+			result = write(1, str, 1);
+			if (result == -1)
+				return (result);
 			++str;
 		}
 		lst = lst->next;
 	}
+	return (1);
 }
 
 int	ft_printf(const char *str, ...)
@@ -48,12 +53,13 @@ int	ft_printf(const char *str, ...)
 		strrecup = recuparg(&strcpy, "cspdiuxX%");
 		addnode(&lststr, strrecup);
 		if (!strrecup && *strcpy != '\0')
-			return (0);
+			return (-1);
 	}
 	va_start (lstarg, str);
 	len = mconv (lstarg, lststr);
 	va_end (lstarg);
-	readlst(lststr);
+	if (readlst(lststr) == -1)
+		return (-1);
 	freelst(&lststr);
 	return (len);
 }
@@ -63,15 +69,40 @@ int	ft_printf(const char *str, ...)
 
 int	main (void)
 {
-	int	count;
-	int	count2;
+	int		count;
+	int		count2;
+	int 	nbr;
+	char	*str = "Salut Ta";
 
 	count = 0;
 	count2 = 1275;
+	nbr = 254;
 	
 	count = ft_printf("Salut Ta%s, ca %ca T%a ?%% %i - %d", "Oui Ta ?", 'v', count2, count2);
 	write (1, "\n", 1);
 	//count2 = printf("Salut Ta%s, ca %ca T%a ?%%", "Oui Ta ?", 'v');
+	
+	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
+	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
+
+	count = ft_printf("Affichage du nombre %d ou %i en hexadecimal: %x ou %X", nbr, nbr, nbr, nbr);
+	write (1, "\n", 1);
+	count2 = printf("Affichage du nombre %d ou %i en hexadecimal: %x ou %X", nbr, nbr, nbr, nbr);
+	
+	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
+	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
+
+	nbr = -120;
+	count = ft_printf("Affichage du nombre %d ou %i en hexadecimal: %x ou %X", nbr, nbr, nbr, nbr);
+	write (1, "\n", 1);
+	count2 = printf("Affichage du nombre %d ou %i en hexadecimal: %x ou %X", nbr, nbr, nbr, nbr);
+	
+	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
+	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
+
+	count = ft_printf("Affichage adresse pointeur %s en hexadecimal: %p", str, str);
+	write (1, "\n", 1);
+	count2 = printf("Affichage adresse pointeur %s en hexadecimal: %p", str, str);
 	
 	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
 	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
@@ -133,6 +164,6 @@ Fonctions de creations de chaines
 - Affichage de chaque chaine de la liste chainee avec retour du nombre de caractere ou -1 si echoue
 
 
-restant a gerer: p x X"
+restant a gerer: p"
 
 */

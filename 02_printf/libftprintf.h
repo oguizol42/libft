@@ -24,7 +24,7 @@ typedef struct str_list
 	struct str_list	*next;
 }	t_strlist;
 
-void		readlst(t_strlist *lst);
+int			readlst(t_strlist *lst);
 int			ft_printf(const char *str, ...);
 t_strlist	*init_node(char *content);
 void		addnode(t_strlist **lst, char *str);
@@ -44,5 +44,8 @@ int			ft_toupper(int c);
 size_t		hexatostr(va_list lstarg, t_strlist *lststr);
 char		*hextoa(unsigned int n);
 int 		cntchhexa(unsigned int n);
-char		*strtoupp(char *str);
+void		strtoupp(char *str);
+size_t		pointtostr(va_list lstarg, t_strlist *lststr);
+char		*pointtoa(unsigned long long n);
+int			cntchpoint(unsigned long long n);
 #endif
