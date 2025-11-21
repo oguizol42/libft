@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:46:00 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/20 15:38:03 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/21 16:26:41 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <limits.h>
 
 typedef struct str_list
 {
@@ -31,7 +32,17 @@ char		*recuparg(char **str, char *argcheck);
 char		*recupstrcut(char **str);
 void		freelst(t_strlist **lst);
 char		*emptystr(void);
-int			mconv(va_list lstarg, t_strlist	*lststr);
+size_t		mconv(va_list lstarg, t_strlist	*lststr);
 size_t		ft_strlen(const char *s);
-int			argtostr (va_list lstarg, t_strlist *lststr);
+size_t		argtostr(va_list lstarg, t_strlist *lststr);
+char		*ft_strdup(const char *s);
+char		*ft_itoa(int n);
+size_t		inttostr(va_list lstarg, t_strlist *lststr);
+size_t		unsitostr(va_list lstarg, t_strlist *lststr);
+char		*unsiitoa(unsigned int n);
+int			ft_toupper(int c);
+size_t		hexatostr(va_list lstarg, t_strlist *lststr);
+char		*hextoa(unsigned int n);
+int 		cntchhexa(unsigned int n);
+char		*strtoupp(char *str);
 #endif

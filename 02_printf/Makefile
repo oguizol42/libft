@@ -6,7 +6,7 @@
 #    By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/19 12:47:10 by oguizol           #+#    #+#              #
-#    Updated: 2025/11/20 15:18:01 by oguizol          ###   ########.fr        #
+#    Updated: 2025/11/21 16:26:31 by oguizol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,12 @@ SRC = ft_printf.c \
 	  managlst.c \
 	  managstr.c \
 	  managconv.c \
-	  ft_strlen.c
+	  ft_strlen.c \
+	  ft_strdup.c \
+	  ft_itoa.c \
+	  unsiitoa.c \
+	  ft_toupper.c \
+	  hexatostring.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -25,6 +30,7 @@ CC = cc
 CFLAGS = -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
+CFLAGS += -g3
 
 %.c%.o:
 	$(CC) $(CFLAGS) $< -o $@

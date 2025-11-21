@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:44:43 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/20 15:36:06 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/21 15:02:15 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,65 +61,49 @@ int	ft_printf(const char *str, ...)
 
 #include <stdio.h>
 
-int	main(int argc, char **argv)
+int	main (void)
 {
-	//char	*strcut;
-	//int	i;
 	int	count;
+	int	count2;
 
 	count = 0;
-	if (argc <= 1)
-		return (0);
-	if (argc == 1)
-		count = ft_printf(argv[1]);
-	else
-		count = ft_printf(argv[1], argv[2]);
-	printf("\n\n\nTaille de la chaine: %d\n", count);
-	/*
-	while (*argv[1] != '\0')
-	{
-		strcut = recupstrcut(&argv[1]);
-		if (strcut)
-		{
-			write (1, "\n\n", 2);
-			while (strcut && *strcut != '\0')
-			{
-				write (1, strcut, 1);
-				++strcut;
-			}
-			write(1, "\n", 1);
-			i = 0;
-			while (argv[1][i] != '\0')
-					{
-							write (1, &(argv[1][i]), 1);
-				++i;
-					}
-		}
-		else
-			return (0);
-		write (1, "\n", 1);
-		strcut = recuparg(&argv[1], "cspdiuxX%");
-			if (strcut)
-			{
-					while (strcut && *strcut != '\0')
-					{
-							write (1, strcut, 1);
-				++strcut;
-					}
-					write (1, "\n", 1);
-			i = 0;
-			while (argv[1][i] != '\0')
-			{
-				write (1, &(argv[1][i]), 1);
-				++i;
-			}
-			}
-		else
-			return (0);
-		write (1, "\n\n", 2);
-	}*/
+	count2 = 1275;
+	
+	count = ft_printf("Salut Ta%s, ca %ca T%a ?%% %i - %d", "Oui Ta ?", 'v', count2, count2);
+	write (1, "\n", 1);
+	//count2 = printf("Salut Ta%s, ca %ca T%a ?%%", "Oui Ta ?", 'v');
+	
+	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
+	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
 	return (0);
 }
+
+/*
+int	main(int argc, char **argv)
+{
+	int	count;
+	int count2;
+
+	count = 0;
+	count2 = 0;
+	if (argc <= 1)
+		return (0);
+	if (argc == 2)
+	{
+		count = ft_printf(argv[1]);
+		write (1, "\n", 1);
+		count2 = printf("%s", argv[1]);
+	}
+	else
+	{
+		count = ft_printf(argv[1], argv[2]);
+		write (1, "\n", 1);
+		count2 = printf(argv[1], argv[2]);
+	}
+	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
+	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
+	return (0);
+}*/
 
 
 /*
@@ -147,4 +131,8 @@ Fonctions de creations de chaines
 - Une fonction d'analyse d'argument retourne chaque chaine de caractere voulu a printf()
 - Stockage des chaines au fur et a mesure dans une liste chainee
 - Affichage de chaque chaine de la liste chainee avec retour du nombre de caractere ou -1 si echoue
+
+
+restant a gerer: p x X"
+
 */
