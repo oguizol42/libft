@@ -1,4 +1,4 @@
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	cntchpoint(unsigned long long n)
 {
@@ -50,7 +50,7 @@ size_t	pointtostr(va_list lstarg, t_strlist *lststr)
 	{
 		n = (unsigned long long)va_arg(lstarg, void *);
 		if (n == 0)
-			str = ft_strdup("0");
+			str = ft_strdup("(nil)");
 		else
 			str = pointtoa(n);
 		free (lststr->content);

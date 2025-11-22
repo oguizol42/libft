@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = prog
+NAME = libftprintf.a
 
 SRC = ft_printf.c \
 	  managlst.c \
@@ -31,14 +31,13 @@ CC = cc
 CFLAGS = -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
-CFLAGS += -g3
 
 %.c%.o:
 	$(CC) $(CFLAGS) $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
-#	ar rcs $(NAME) $(OBJ)
+	ar rcs $(NAME) $(OBJ)
+#	$(CC) $(OBJ) -o $(NAME)
 #	$(CC) $(CFLAGS) -o $@ $^
 
 all: $(NAME)

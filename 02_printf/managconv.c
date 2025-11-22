@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 size_t	unsitostr(va_list lstarg, t_strlist *lststr)
 {
@@ -57,6 +57,9 @@ size_t	chartostr(va_list lstarg, t_strlist *lststr)
 		str = ft_strdup(c);
 		free (lststr->content);
 		lststr->content = str;
+		lststr->state = 'c';
+		if (c[0] == 0)
+			return (1);
 		return (ft_strlen(str));
 	}
 	return (inttostr(lstarg, lststr));
@@ -71,7 +74,11 @@ size_t	argtostr(va_list lstarg, t_strlist *lststr)
 	{
 		if (((lststr->content)[1]) == 's')
 		{
-			str = ft_strdup(va_arg(lstarg, char *));
+			str = va_arg(lstarg, char *);
+			if (!str)
+				str = ft_strdup("(null)");
+			else
+				str = ft_strdup(str);
 			if (str)
 			{
 				free (lststr->content);
@@ -96,8 +103,8 @@ size_t	mconv(va_list lstarg, t_strlist *lststr)
 	while (lststr)
 	{
 		if (lststr->content)
-			argtostr (lstarg, lststr);
-		len += ft_strlen(lststr->content);
+			len += argtostr (lstarg, lststr);
+		//len += ft_strlen(lststr->content);
 		lststr = lststr->next;
 		if (lststr)
 		{

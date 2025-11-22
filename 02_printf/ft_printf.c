@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	readlst(t_strlist *lst)
 {
@@ -22,13 +22,18 @@ int	readlst(t_strlist *lst)
 	while (lst)
 	{
 		str = lst->content;
-		while (str && *str != '\0')
+		if ((lst->state) == 's')
 		{
-			result = write(1, str, 1);
-			if (result == -1)
-				return (result);
-			++str;
+			while (str && *str != '\0')
+			{
+				result = write(1, str, 1);
+				if (result == -1)
+					return (result);
+				++str;
+			}
 		}
+		else
+			write (1, str, 1);
 		lst = lst->next;
 	}
 	return (1);
@@ -64,7 +69,7 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-
+/*
 #include <stdio.h>
 
 int	main (void)
@@ -106,9 +111,16 @@ int	main (void)
 	
 	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
 	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
-	return (0);
-}
 
+
+	count = ft_printf(" NULL %s NULL ", NULL);
+	write (1, "\n", 1);
+	count2 = printf(" NULL %s NULL ", NULL);
+	
+	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
+	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
+	return (0);
+}*/
 /*
 int	main(int argc, char **argv)
 {

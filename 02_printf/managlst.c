@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 t_strlist	*init_node(char *content)
 {
@@ -21,6 +21,7 @@ t_strlist	*init_node(char *content)
 	if (new)
 	{
 		new->content = content;
+		new->state = 's';
 		new->next = NULL;
 	}
 	return (new);

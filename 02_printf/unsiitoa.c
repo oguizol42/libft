@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static unsigned int	countch(unsigned int n)
 {
@@ -34,7 +34,7 @@ static char	*allocalpha(unsigned int cnt)
 	{
 		alpha = (char *)malloc(sizeof(char) * (cnt + 1));
 		if (alpha)
-			alpha[cnt + 1] = '\0';
+			alpha[cnt] = '\0';
 	}
 	return (alpha);
 }
@@ -70,7 +70,7 @@ char	*unsiitoa(unsigned int n)
 {
 	char				*alpha;
 	unsigned int		cnt;
-	int					result;
+	unsigned int					result;
 
 	alpha = NULL;
 	result = 0;

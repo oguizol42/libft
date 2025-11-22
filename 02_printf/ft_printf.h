@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -21,6 +21,7 @@
 typedef struct str_list
 {
 	char			*content;
+	char			state;
 	struct str_list	*next;
 }	t_strlist;
 
