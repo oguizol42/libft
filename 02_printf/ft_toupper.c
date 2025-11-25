@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 10:30:30 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/07 10:41:09 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/24 08:49:00 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,3 @@ int	ft_toupper(int c)
 		c -= (int)('a' - 'A');
 	return (c);
 }
-
-/*
-int	main(void)
-{
-	int	l;
-
-	while (1)
-	{
-		printf("Taper une lettre: ");
-		l = getchar();
-		getchar();
-		printf("%c\n", ft_toupper(l));
-	}
-	return (0);
-}
-*/

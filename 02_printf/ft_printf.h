@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:46:00 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/21 16:26:41 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/24 16:32:31 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <stdarg.h>
 # include <limits.h>
 
-typedef struct str_list
+typedef struct s_strlist
 {
 	char			*content;
 	char			state;
-	struct str_list	*next;
+	struct s_strlist	*next;
 }	t_strlist;
 
 int			readlst(t_strlist *lst);
@@ -44,9 +44,11 @@ char		*unsiitoa(unsigned int n);
 int			ft_toupper(int c);
 size_t		hexatostr(va_list lstarg, t_strlist *lststr);
 char		*hextoa(unsigned int n);
-int 		cntchhexa(unsigned int n);
+int			cntchhexa(unsigned int n);
 void		strtoupp(char *str);
 size_t		pointtostr(va_list lstarg, t_strlist *lststr);
 char		*pointtoa(unsigned long long n);
 int			cntchpoint(unsigned long long n);
+int			checkstr(char **str, t_strlist **lststr);
+
 #endif

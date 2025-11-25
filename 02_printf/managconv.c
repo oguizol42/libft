@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:18:06 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/21 16:28:20 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/24 09:15:52 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ size_t	mconv(va_list lstarg, t_strlist *lststr)
 	{
 		if (lststr->content)
 			len += argtostr (lstarg, lststr);
-		//len += ft_strlen(lststr->content);
 		lststr = lststr->next;
 		if (lststr)
 		{

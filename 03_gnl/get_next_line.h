@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 17:49:23 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/24 08:48:52 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/24 11:25:18 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/25 16:30:20 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 25
+#endif
 
-size_t	ft_strlen(const char *s)
+#include <unistd.h>
+#include <stdlib.h>
+
+struct typedef s_lststash
 {
-	size_t	count;
+	int			fd;
+	char		*stash;
+	t_lststash	*next;
+}	t_lststash;
 
-	count = 0;
-	while (*s != '\0')
-	{
-		++s;
-		++count;
-	}
-	return (count);
-}
+char	*get_next_line(int fd);
+
+#endif

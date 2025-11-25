@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:26:16 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/21 14:53:25 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/24 09:16:10 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*unsiitoa(unsigned int n)
 {
 	char				*alpha;
 	unsigned int		cnt;
-	unsigned int					result;
+	unsigned int		result;
 
 	alpha = NULL;
 	result = 0;
@@ -87,16 +87,3 @@ char	*unsiitoa(unsigned int n)
 		return (alpha);
 	return (NULL);
 }
-
-/*
-int	main(void)
-{
-	int	nbr;
-
-	nbr = 0;
-	printf("Entrez un nombre: ");
-	scanf("%d", &nbr);
-	printf("\nChaine en sortie: %s", ft_itoa(nbr));
-	return (0);
-}
-*/

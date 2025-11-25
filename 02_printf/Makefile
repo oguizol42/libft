@@ -6,7 +6,7 @@
 #    By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/19 12:47:10 by oguizol           #+#    #+#              #
-#    Updated: 2025/11/21 16:26:31 by oguizol          ###   ########.fr        #
+#    Updated: 2025/11/24 10:07:57 by oguizol          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,6 @@ CFLAGS += -Werror
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
-#	$(CC) $(OBJ) -o $(NAME)
-#	$(CC) $(CFLAGS) -o $@ $^
 
 all: $(NAME)
 
@@ -51,8 +49,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re bonus
-
-
-# Mettre a jour: 
-#	- remplacer  ligne 14 NAME = prog par NAME = libftprintf.a
-#	- remplacer ligne 32 $(CC) $(OBJ) -o $(NAME) par ar rcs $(NAME) $(OBJ)

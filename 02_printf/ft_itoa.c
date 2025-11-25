@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:08:16 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/21 13:26:29 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/24 08:48:09 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,3 @@ char	*ft_itoa(int n)
 		return (alpha);
 	return (NULL);
 }
-
-/*
-int	main(void)
-{
-	int	nbr;
-
-	nbr = 0;
-	printf("Entrez un nombre: ");
-	scanf("%d", &nbr);
-	printf("\nChaine en sortie: %s", ft_itoa(nbr));
-	return (0);
-}
-*/

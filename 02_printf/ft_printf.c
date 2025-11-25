@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 12:44:43 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/21 15:02:15 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/24 10:09:31 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,25 @@ int	readlst(t_strlist *lst)
 	return (1);
 }
 
+int	checkstr(char **str, t_strlist **lststr)
+{
+	char		*strrecup;
+
+	strrecup = NULL;
+	strrecup = recupstrcut(str);
+	addnode(lststr, strrecup);
+	strrecup = recuparg(str, "cspdiuxX%");
+	addnode(lststr, strrecup);
+	if (!strrecup && **str != '\0')
+		return (-1);
+	return (1);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	t_strlist	*lststr;
 	va_list		lstarg;
 	char		*strcpy;
-	char		*strrecup;
 	int			len;
 
 	strcpy = (char *)str;
@@ -53,11 +66,7 @@ int	ft_printf(const char *str, ...)
 		return (0);
 	while (strcpy && (*strcpy != '\0'))
 	{
-		strrecup = recupstrcut(&strcpy);
-		addnode(&lststr, strrecup);
-		strrecup = recuparg(&strcpy, "cspdiuxX%");
-		addnode(&lststr, strrecup);
-		if (!strrecup && *strcpy != '\0')
+		if (checkstr(&strcpy, &lststr) == -1)
 			return (-1);
 	}
 	va_start (lstarg, str);
@@ -115,7 +124,7 @@ int	main (void)
 
 	count = ft_printf(" NULL %s NULL ", NULL);
 	write (1, "\n", 1);
-	count2 = printf(" NULL %s NULL ", NULL);
+	//count2 = printf(" NULL %s NULL ", NULL);
 	
 	printf("\n\n\nTaille de la chaine ft_printf: %d\n", count);
 	printf("\n\n\nTaille de la chaine    printf: %d\n", count2);
