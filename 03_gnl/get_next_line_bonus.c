@@ -6,13 +6,13 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:02 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/25 20:57:22 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 11:57:35 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*doread(t_lststash *list, t_lststash *node)
+char	*doread(int fd, t_lststash *node)
 {
 	char	*str;
 	char	*strj;
@@ -29,13 +29,13 @@ char	*doread(t_lststash *list, t_lststash *node)
 		return (NULL);
 	str[len] = '\0';
 	if (len < BUFFER_SIZE)
-		node->endofi == 1;
-	strj = ft_strjoin(node->stach, str);
+		node->endofi = 1;
+	strj = ft_strjoin(node->stash, str);
 	free (str);
 	str = NULL;
 	if (!strj)
 		return (NULL);
-	str = strcut(list, node, strj);
+	str = strcut(node, strj);
 	return (str);
 }
 
@@ -72,7 +72,7 @@ void	initnode(int fd, t_lststash **node)
 		(*node)->stash = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		(*node)->endofi = 0;
 		(*node)->next = NULL;
-		if (!stash)
+		if (!((*node)->stash))
 		{
 			free(*node);
 			(*node) = NULL;
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 			addnode(list, node);
 		}
 	}
-	str = doread(list, node);
+	str = doread(fd, node);
 	if (node && !(node->stash) && (node->endofi == 1))
 		delnode(&list, node);
 	return (str);

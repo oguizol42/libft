@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:28 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/25 20:32:42 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 11:58:41 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-struct typedef s_lststash
+typedef struct s_lststash
 {
-	int			fd;
-	int			endofi;
-	char		*stash;
-	t_lststash	*next;
+	int					fd;
+	int					endofi;
+	char				*stash;
+	struct s_lststash	*next;
 }	t_lststash;
 
 char		*get_next_line(int fd);
 void		initnode(int fd, t_lststash **node);
-void		delnode(t_lststash *list, t_lststash *node);
+void		delnode(t_lststash **list, t_lststash *node);
 void		addnode(t_lststash *list, t_lststash *poslist);
-char		*doread(t_lststash *list, t_lststash *node);
+char		*doread(int fd, t_lststash *node);
 char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *s);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
-char		*strcut(t_lststash *list, t_lststash *node, char *strj);
+char		*strcut(t_lststash *node, char *strj);
 
 #endif

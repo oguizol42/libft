@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:43 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/25 20:54:36 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 11:57:56 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptrjoin);
 }
 
-char	*strcut(t_lststash *list, t_lststash *node, char *strj)
+char	*strcut(t_lststash *node, char *strj)
 {
 	char	*str;
-	int		len;
-	int		lenj;
+	size_t	len;
+	size_t	lenj;
 
 	str = NULL;
 	while (strj && (strj[len] != '\n') && (strj[len] != '\0'))
