@@ -93,70 +93,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 
 
-char	*strcut(t_lststash *node, char *strj)
+int	strcut(t_lststash *node, char **strj)
 {
 	char	*str;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	free(node->stash);
-	node->stash = NULL;
-	/*TEMPO
-	printf("\nPremier strj:\n%s\n", strj);
-	/TEMPO END*/
-	while (strj && (strj[i] != '\0' && (strj[i] != '\n')))
+	while ((strj && *strj) && ((*strj)[i] != '\0') && ((*strj)[i] != '\n'))
 		++i;
-	if ((str[i] == '\0') || (str[i + 1] == '\0'))
-		return (strj);
-	node->stash = ft_strjoin("", &(strj[i + 1]));
-	strj[i + 1] = '\0';
-	str = ft_strjoin("", strj);
-	/*TEMPO
-	printf("\nDeuxieme strj:\n%s\n", strj);
-	printf("\nnode->stash:\n%s\n", node->stash);
-	printf("\nstr final:\n%s\n\n\n", str);
-	/TEMPO END*/
-	free (strj);
-	strj = NULL;
-	return (str);
-}
-
-/*
-char	*strcut(t_lststash *node, char *strj)
-{
-	char	*str;
-	size_t	len;
-	size_t	lenj;
-
-	str = NULL;
-	len = 0;
-	lenj = 0;
-	while (strj && (strj[len] != '\n') && (strj[len] != '\0'))
-		++len;
-	free(node->stash);
-	node->stash = NULL;
-	if (len == ft_strlen(strj))
-		str = strj;
-	else
-	{
-		str = (char *)malloc(sizeof(char) * (len + 2));
-		if (str)
-			ft_strlcpy(str, strj, (len + 2));
-		lenj = ft_strlen(&(strj[len + 1]));
-		node->stash = (char *)malloc(sizeof(char) * (lenj + 1));
-		if (node->stash)
-			ft_strlcpy(node->stash, (&(strj[len + 1])), (lenj + 1));
-		free (strj);
-	}
-	return (str);
-}*/
-
-/*
-char	*strcut(t_lststash *node, char *strj)
-{
+	if (((*strj)[i] == '\0') && (node->endofi == 0))
+		return (0);
 	free (node->stash);
 	node->stash = NULL;
-	node->endofi = 1;
-	return (strj);
+	if ((i == ft_strlen(*strj)) || ((i + 1) == ft_strlen(*strj)))
+		return (1);
+	node->stash = ft_strjoin("", &((*strj)[i + 1]));
+	(*strj)[i + 1] = '\0';
+	str = ft_strjoin("", (*strj));
+	free (*strj);
+	*strj = str;
+	return (1);
 }
-*/

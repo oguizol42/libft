@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:43 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 11:57:56 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 15:39:57 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -92,29 +92,25 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptrjoin);
 }
 
-char	*strcut(t_lststash *node, char *strj)
+
+int	strcut(t_lststash *node, char **strj)
 {
 	char	*str;
-	size_t	len;
-	size_t	lenj;
+	int		i;
 
-	str = NULL;
-	while (strj && (strj[len] != '\n') && (strj[len] != '\0'))
-		++len;
-	free(node->stash);
+	i = 0;
+	while ((strj && *strj) && ((*strj)[i] != '\0') && ((*strj)[i] != '\n'))
+		++i;
+	if (((*strj)[i] == '\0') && (node->endofi == 0))
+		return (0);
+	free (node->stash);
 	node->stash = NULL;
-	if (len == ft_strlen(strj))
-		str = strj;
-	else
-	{
-		str = (char *)malloc(sizeof(char) * (len + 2));
-		if (str)
-			ft_strlcpy(str, strj, (len + 2));
-		lenj = ft_strlen(&(strj[len + 1]));
-		node->stash = (char *)malloc(sizeof(char) * (lenj + 1));
-		if (node->stash)
-			ft_strlcpy(node->stash, (&(strj[len + 1])), (lenj + 1));
-		free (strj);
-	}
-	return (str);
+	if ((i == ft_strlen(*strj)) || ((i + 1) == ft_strlen(*strj)))
+		return (1);
+	node->stash = ft_strjoin("", &((*strj)[i + 1]));
+	(*strj)[i + 1] = '\0';
+	str = ft_strjoin("", (*strj));
+	free (*strj);
+	*strj = str;
+	return (1);
 }

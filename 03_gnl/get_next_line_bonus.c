@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:02 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 11:57:35 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 15:39:28 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
-char	*doread(int fd, t_lststash *node)
+char	*doread(t_lststash *node)
 {
 	char	*str;
 	char	*strj;
 	ssize_t	len;
 
-	str = NULL;
-	strj = NULL;
-	str = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!str)
-		return (NULL);
-	if (node->endofi == 0)
-		len = read(fd, str, BUFFER_SIZE);
-	if (len == -1)
-		return (NULL);
-	str[len] = '\0';
-	if (len < BUFFER_SIZE)
-		node->endofi = 1;
-	strj = ft_strjoin(node->stash, str);
-	free (str);
-	str = NULL;
-	if (!strj)
-		return (NULL);
-	str = strcut(node, strj);
-	return (str);
+	strj = ft_strjoin(node->stash, "");
+	while (!(strcut(node, &strj)))
+	{
+		str = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!str)
+			return (NULL);
+		len = read(node->fd, str, BUFFER_SIZE);
+		str[len] = '\0';
+		strj = ft_strjoin(strj, str);
+		free(str);
+		if (!strj)
+			return (NULL);
+		if (len < BUFFER_SIZE)
+			node->endofi = 1;
+	}
+	return (strj);
 }
 
 void	addnode(t_lststash *list, t_lststash *node)
@@ -69,16 +66,9 @@ void	initnode(int fd, t_lststash **node)
 	if (*node)
 	{
 		(*node)->fd = fd;
-		(*node)->stash = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		(*node)->stash = NULL;
 		(*node)->endofi = 0;
 		(*node)->next = NULL;
-		if (!((*node)->stash))
-		{
-			free(*node);
-			(*node) = NULL;
-		}
-		else
-			(*(*node)->stash) = '\0';
 	}
 }
 
@@ -105,8 +95,56 @@ char	*get_next_line(int fd)
 			addnode(list, node);
 		}
 	}
-	str = doread(fd, node);
-	if (node && !(node->stash) && (node->endofi == 1))
+	str = doread(node);
+	if (!str || (node && !(node->stash) && (node->endofi == 1)))
 		delnode(&list, node);
 	return (str);
 }
+
+/*
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+int	main(void)
+{
+	int		fd;
+	int		fd2;
+	char	*str;
+	
+	fd = open("TEXT1", O_RDONLY);
+	fd2 = open("TEXT2", O_RDONLY);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd2);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd2);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd2);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd2);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free (str);
+	str = get_next_line(fd2);
+	printf("%s", str);
+	free (str);
+	return (0);
+}
+*/
