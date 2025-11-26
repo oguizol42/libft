@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:02 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 13:39:09 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 15:39:28 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ char	*doread(int fd, t_lststash *node)
 	str[len] = '\0';
 	if (len < BUFFER_SIZE)
 		node->endofi = 1;
+	//TEMPO
+	//printf("\nnode->stash de doread:%s\n", node->stash);
+	//TEMPO END
 	strj = ft_strjoin(node->stash, str);
 	free (str);
 	str = NULL;
@@ -106,9 +109,17 @@ char	*get_next_line(int fd)
 	return (str);
 }
 
-/*
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 int	main(void)
 {
+	int	fd;
+	
+	fd = open("TEXT1", O_RDONLY);
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 	return (0);
 }
-*/

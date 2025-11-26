@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:43 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 13:40:32 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 15:39:57 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,36 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptrjoin);
 }
 
+
+char	*strcut(t_lststash *node, char *strj)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	free(node->stash);
+	node->stash = NULL;
+	/*TEMPO
+	printf("\nPremier strj:\n%s\n", strj);
+	/TEMPO END*/
+	while (strj && (strj[i] != '\0' && (strj[i] != '\n')))
+		++i;
+	if ((str[i] == '\0') || (str[i + 1] == '\0'))
+		return (strj);
+	node->stash = ft_strjoin("", &(strj[i + 1]));
+	strj[i + 1] = '\0';
+	str = ft_strjoin("", strj);
+	/*TEMPO
+	printf("\nDeuxieme strj:\n%s\n", strj);
+	printf("\nnode->stash:\n%s\n", node->stash);
+	printf("\nstr final:\n%s\n\n\n", str);
+	/TEMPO END*/
+	free (strj);
+	strj = NULL;
+	return (str);
+}
+
+/*
 char	*strcut(t_lststash *node, char *strj)
 {
 	char	*str;
@@ -119,8 +149,8 @@ char	*strcut(t_lststash *node, char *strj)
 		free (strj);
 	}
 	return (str);
-}
-	
+}*/
+
 /*
 char	*strcut(t_lststash *node, char *strj)
 {
@@ -128,4 +158,5 @@ char	*strcut(t_lststash *node, char *strj)
 	node->stash = NULL;
 	node->endofi = 1;
 	return (strj);
-}*/
+}
+*/

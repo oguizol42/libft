@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:28 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 11:59:13 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/26 15:17:28 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+
+# include <stdio.h>
 
 typedef struct s_lststash
 {
