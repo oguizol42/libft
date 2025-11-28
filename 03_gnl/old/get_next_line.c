@@ -6,12 +6,42 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:02 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 15:39:28 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/27 22:52:56 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*doread(t_lststash *node)
+{
+	char	*strj;
+	int		check;
+	int		len;
+
+	check = 1;
+	strj = NULL;
+	len = 0;
+	while (check)
+	{
+		strj = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!strj)
+			return (NULL);
+		len = read(node->fd, strj, BUFFER_SIZE);
+		if (len < 0)
+		{
+			free (strj);
+			return (NULL);
+		}
+		strj[len] = '\0';
+		strj = ft_strjoin((node->stash), strj);
+		if (len < BUFFER_SIZE)
+			node->endofi = 1;
+		check = strcut(node, &strj);
+	}
+	return (strj);
+}
+
+/*
 char	*doread(t_lststash *node)
 {
 	char	*str;
@@ -25,6 +55,11 @@ char	*doread(t_lststash *node)
 		if (!str)
 			return (NULL);
 		len = read(node->fd, str, BUFFER_SIZE);
+		if (len < 0)
+		{
+			free (str);
+			return (NULL);
+		}
 		str[len] = '\0';
 		strj = ft_strjoin(strj, str);
 		free(str);
@@ -34,7 +69,7 @@ char	*doread(t_lststash *node)
 			node->endofi = 1;
 	}
 	return (strj);
-}
+}*/
 
 void	addnode(t_lststash *list, t_lststash *node)
 {
@@ -59,7 +94,7 @@ void	delnode(t_lststash **list, t_lststash *node)
 	node = NULL;
 }
 
-void	initnode(int fd, t_lststash **node)
+t_lststash	*initnode(int fd, t_lststash **node)
 {
 	*node = NULL;
 	*node = (t_lststash *)malloc(sizeof(t_lststash));
@@ -69,7 +104,9 @@ void	initnode(int fd, t_lststash **node)
 		(*node)->stash = NULL;
 		(*node)->endofi = 0;
 		(*node)->next = NULL;
+		return (*node);
 	}
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
@@ -79,29 +116,38 @@ char	*get_next_line(int fd)
 	char				*str;
 
 	str = NULL;
+	if ((fd < 0) || (BUFFER_SIZE < 1))
+		return (NULL);
 	if (!list)
-	{
-		initnode(fd, &list);
-		node = list;
-	}
-	else
-	{
-		node = list;
-		while (node && (node->fd != fd))
-			node = node->next;
-		if (!node)
-		{
-			initnode(fd, &node);
-			addnode(list, node);
-		}
-	}
+		node = initnode(fd, &list);
 	str = doread(node);
-	if (!str || (node && !(node->stash) && (node->endofi == 1)))
+	if (!str || (node && (node->stash == NULL) && (node->endofi == 1)))
 		delnode(&list, node);
 	return (str);
 }
 
+
+# include <stdio.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+int	main(void)
+{
+	int		fd;
+	char	*str;
+	
+	fd = open("TEXT1", O_RDONLY);
+	str = get_next_line(fd);
+	//printf("%s", str);
+	//free (str);
+	close (fd);
+	return (0);
+}
+
 /*
+# include <stdio.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

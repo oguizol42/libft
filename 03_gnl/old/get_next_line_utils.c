@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:13:43 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 15:39:57 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/11/27 22:31:29 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ size_t	ft_strlen(const char *s)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*ptrjoin;
+	char	*tofree;
 	char	empty[1];
 	size_t	lens1;
 	size_t	lens2;
@@ -89,14 +90,46 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ft_strlcpy(ptrjoin, s1, lens1 + 1);
 		ft_strlcat(ptrjoin, s2, lens1 + lens2 + 1);
 	}
+	tofree = (char *)s2;
+	free (tofree);
+	tofree = NULL;
 	return (ptrjoin);
 }
 
+int	strcut(t_lststash *node, char **strj)
+{
+	int		i;
 
+	i = 0;
+	free (node->stash);
+	node->stash = NULL;
+	while (((*strj)[i] != '\0') && ((*strj)[i] != '\n'))
+		++i;
+	if (((*strj)[i] == '\0') && (node->endofi == 1))
+		return (0);
+	if ((*strj)[i] == '\0')
+	{
+		node->stash = *strj;
+		return (1);
+	}
+	node->stash = ft_strjoin("", (&((*strj)[i + 1])));
+	(*strj)[i + 1] = '\0';
+	(*strj) = ft_strjoin("", (*strj));
+	return (0);
+}
+
+//Fait un read du fichier
+	//Associe les deux string
+	//Si une fin de ligne detectee=> range le reste dans stash 
+	//								 Si fin de ligne == fin de fichier: passe endofi a 1
+	//								 renvoie la str
+	//Repart au read du fichier.
+
+/*
 int	strcut(t_lststash *node, char **strj)
 {
 	char	*str;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while ((strj && *strj) && ((*strj)[i] != '\0') && ((*strj)[i] != '\n'))
@@ -105,7 +138,7 @@ int	strcut(t_lststash *node, char **strj)
 		return (0);
 	free (node->stash);
 	node->stash = NULL;
-	if ((i == ft_strlen(*strj)) || ((i + 1) == ft_strlen(*strj)))
+	if (i == ft_strlen(*strj))// || ((i + 1) == ft_strlen(*strj)))
 		return (1);
 	node->stash = ft_strjoin("", &((*strj)[i + 1]));
 	(*strj)[i + 1] = '\0';
@@ -114,3 +147,4 @@ int	strcut(t_lststash *node, char **strj)
 	*strj = str;
 	return (1);
 }
+*/

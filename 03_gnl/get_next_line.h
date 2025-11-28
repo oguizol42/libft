@@ -5,40 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 14:13:28 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 15:17:28 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/28 15:03:39 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/28 16:39:04 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 25
+#  define BUFFER_SIZE 48
 # endif
 
 # include <unistd.h>
 # include <stdlib.h>
 
-
-# include <stdio.h>
-
-typedef struct s_lststash
+typedef struct s_lstfd
 {
-	int					fd;
-	int					endofi;
-	char				*stash;
-	struct s_lststash	*next;
-}	t_lststash;
+	int				fd;
+	char			*stash;
+	int				endofi;
+	struct s_lstfd	*next;
+}							t_lstfd;
 
-char		*get_next_line(int fd);
-void		initnode(int fd, t_lststash **node);
-void		delnode(t_lststash **list, t_lststash *node);
-void		addnode(t_lststash *list, t_lststash *poslist);
-char		*doread(t_lststash *node);
-char		*ft_strjoin(char const *s1, char const *s2);
-size_t		ft_strlen(const char *s);
-size_t		ft_strlcpy(char *dst, const char *src, size_t size);
-size_t		ft_strlcat(char *dst, const char *src, size_t size);
-int			strcut(t_lststash *node, char **strj);
+char	*get_next_line(int fd);
+t_lstfd	*addnode(t_lstfd *list, int fd);
 
 #endif

@@ -5,99 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 14:13:02 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/26 15:39:28 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/28 15:03:20 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/28 16:52:48 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*doread(t_lststash *node)
+t_lstfd	*addnode(t_lstfd *list, int fd)
 {
-	char	*str;
-	char	*strj;
-	ssize_t	len;
-
-	strj = ft_strjoin(node->stash, "");
-	while (!(strcut(node, &strj)))
+	list = (t_lstfd *)malloc(sizeof(t_lstfd));
+	if (!list)
+		return (NULL);
+	list->stash = (char *)malloc (sizeof(char) * (BUFFER_SIZE + 1));
+	if (!(list->stash))
 	{
-		str = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!str)
-			return (NULL);
-		len = read(node->fd, str, BUFFER_SIZE);
-		str[len] = '\0';
-		strj = ft_strjoin(strj, str);
-		free(str);
-		if (!strj)
-			return (NULL);
-		if (len < BUFFER_SIZE)
-			node->endofi = 1;
+		free (list);
+		return (NULL);
 	}
-	return (strj);
-}
-
-void	addnode(t_lststash *list, t_lststash *node)
-{
-	while (list && (list->next != NULL))
-		list = list->next;
-	if (list && node)
-		list->next = node;
-}
-
-void	delnode(t_lststash **list, t_lststash *node)
-{
-	t_lststash	*listpos;
-
-	listpos = *list;
-	while ((listpos != node) && (listpos->next != node))
-		listpos = listpos->next;
-	if (listpos == node)
-		*list = (*list)->next;
-	else
-		listpos->next = node->next;
-	free (node);
-	node = NULL;
-}
-
-void	initnode(int fd, t_lststash **node)
-{
-	*node = NULL;
-	*node = (t_lststash *)malloc(sizeof(t_lststash));
-	if (*node)
-	{
-		(*node)->fd = fd;
-		(*node)->stash = NULL;
-		(*node)->endofi = 0;
-		(*node)->next = NULL;
-	}
+	list->fd = fd;
+	list->endofi = 0;
+	list->next = NULL;
+	return (list);
 }
 
 char	*get_next_line(int fd)
 {
-	static t_lststash	*list;
-	t_lststash			*node;
-	char				*str;
+	static t_lstfd	*list;
+	char			*str;
 
 	str = NULL;
+	if ((fd < 0) || (BUFFER_SIZE < 1))
+		return (NULL);
+	if (!(list))
+		addnode(list, fd);
 	if (!list)
-	{
-		initnode(fd, &list);
-		node = list;
-	}
-	else
-	{
-		node = list;
-		while (node && (node->fd != fd))
-			node = node->next;
-		if (!node)
-		{
-			initnode(fd, &node);
-			addnode(list, node);
-		}
-	}
-	str = doread(node);
-	if (!str || (node && !(node->stash) && (node->endofi == 1)))
-		delnode(&list, node);
+		return (NULL);
 	return (str);
 }
 
@@ -109,42 +52,15 @@ char	*get_next_line(int fd)
 
 int	main(void)
 {
-	int		fd;
-	int		fd2;
 	char	*str;
-	
+	int		fd;
+
+	str = NULL;
 	fd = open("TEXT1", O_RDONLY);
-	fd2 = open("TEXT2", O_RDONLY);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("\nTexte recupere:\n%s\n", str);
 	free (str);
-	str = get_next_line(fd2);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd2);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd2);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd2);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free (str);
-	str = get_next_line(fd2);
-	printf("%s", str);
-	free (str);
+	close (fd);
 	return (0);
 }
 */
