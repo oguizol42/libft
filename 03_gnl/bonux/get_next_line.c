@@ -14,76 +14,98 @@
 
 int	cutline(t_lstfd *node, char **line)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (((*line)[i] != '\0') && ((*line)[i] != '\n'))
 		++i;
-	if (((*line)[i] == '\0') && (node->endofi != 1))
-		return (1);
-	*(node->stash) = '\0';
-	if (((*line)[i] == '\0') && (node->endofi == 1))		
+	if ((*line)[i] == '\0')
 		return (0);
-	ft_strlcpy(node->stash, &((*line)[i + 1]), (BUFFER_SIZE + 1));
+	ft_strlcpy((node->stash), (&(*line)[i + 1]), (BUFFER_SIZE + 1));
 	(*line)[i + 1] = '\0';
-	(*line) = ft_strjoin(NULL, (*line));
-	return (0);
+	*line = ft_strjoin("", (*line));
+	return (1);
 }
 
 char	*get_line(t_lstfd *node)
 {
 	char	*strj;
 	char	*str;
-	char	*tmp;
-	int		endg;
 	int		len;
+	int		endg;
 
-	endg = 1;
-	len = 0;
-	//Recuperation stash
-	strj = ft_strjoin(node->stash, NULL);
-	//Recuperation nouvelle ligne tant que aucune fin de ligne ou de fichier atteinte
-	while (endg)
+	endg = 0;
+	strj = NULL;
+	while (!endg)
 	{
 		str = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!str)
-		{
-			free(strj);
-			return (NULL);
-		}
+			NULL;
 		len = read(node->fd, str, BUFFER_SIZE);
-		if ((len < 0) || ((len == 0) && (*strj == '\0')))
-		{
-			free(strj);
-			free(str);
-			*(node->stash) = '\0';
-			return (NULL);
-		}
+		if (len < 0)
+			return (free (str), NULL);
 		str[len] = '\0';
 		if (len < BUFFER_SIZE)
 			node->endofi = 1;
-		tmp = strj;
-		strj = ft_strjoin(strj, str);
-		free(tmp);
+		str = ft_strjoin(strj, str);
+		strj = ft_strjoin(node->stash, str);
+		*(node->stash) = '\0';
 		endg = cutline(node, &strj);
 	}
-	//mettre dans le stash ce qu'il reste
-	//Retourner chaine a envoyer
 	return (strj);
+}
+
+t_lstfd	*getnode(t_lstfd **list, int fd)
+{
+	t_lstfd	*nodefd;
+	t_lstfd	*tmp;
+
+	tmp = (*list);
+	nodefd = (t_lstfd *)malloc(sizeof(t_lstfd));
+	if (!nodefd)
+		return (NULL);
+	nodefd->fd = fd;
+	nodefd->endofi = 0;
+	*(nodefd->stash) = '\0';
+	nodefd->next = NULL;
+	if ((*list) == NULL)
+		*list = nodefd;
+	else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = nodefd;
+	}
+	return (nodefd);
+}
+
+void	delnode(t_lstfd **list)
+{
+	free (*list);
+	*list = NULL;
 }
 
 char	*get_next_line(int fd)
 {
-	static t_lstfd	nodefd;
+	static t_lstfd	*list;
+	t_lstfd			*nodefd;
 	char			*str;
 
 	str = NULL;
-	if ((fd < 0) || (fd == 1) || (fd == 2) || (BUFFER_SIZE < 1))
+	if ((fd < 0) || (BUFFER_SIZE < 1))
 		return (NULL);
-	nodefd.fd = fd;
-	str = get_line(&nodefd);
-	if (*(nodefd.stash) == '\0')
-		nodefd.endofi = 0;
+	if (!list)
+		nodefd = getnode(&list, fd);
+	else //Juste pour la version sans bonus
+	{
+		nodefd = list;
+		nodefd->fd = fd;
+	}
+	if (!nodefd)
+		return (NULL);
+	str = get_line(nodefd);
+	if ((nodefd->endofi == 1) && (*(nodefd->stash) == '\0'))
+		delnode(&list);
 	return (str);
 }
 
@@ -92,11 +114,11 @@ int	main(void)
 {
 	char	*str;
 	int		fd1;
-	int		fd2;
+	//int		fd2;
 
 	str = NULL;
 	fd1 = open("TEXT1", O_RDONLY);
-	fd2 = open("TEXT2", O_RDONLY);
+	//fd2 = open("TEXT2", O_RDONLY);
 	str = get_next_line(fd1);
 	printf("\nTexte recupere:\n%s\n", str);
 	free (str);
@@ -109,6 +131,7 @@ int	main(void)
 	str = get_next_line(fd1);
 	printf("\nTexte recupere:\n%s\n", str);
 	free (str);
+
 
 	str = get_next_line(fd2);
 	printf("\nTexte recupere:\n%s\n", str);
@@ -126,7 +149,7 @@ int	main(void)
 	printf("\nTexte recupere:\n%s\n", str);
 	free (str);
 	close (fd1);
-	close (fd2);
+	//close (fd2);
 	return (0);
 }
 */

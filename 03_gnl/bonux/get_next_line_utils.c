@@ -91,10 +91,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ft_strlcat(ptrjoin, s2, lens1 + lens2 + 1);
 	}
 	tofree = (char *)s2;
-	if (tofree != empty)
-	{
-		free (tofree);
-		tofree = NULL;
-	}
+	free (tofree);
+	tofree = NULL;
 	return (ptrjoin);
 }

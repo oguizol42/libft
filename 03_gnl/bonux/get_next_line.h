@@ -18,12 +18,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-/*
+/*TEMPO
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-*/
+TEMPO END*/
 
 typedef struct s_lstfd
 {
@@ -34,6 +34,7 @@ typedef struct s_lstfd
 }							t_lstfd;
 
 char	*get_next_line(int fd);
+t_lstfd	*getnode(t_lstfd **list, int fd);
 char	*get_line(t_lstfd *node);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
