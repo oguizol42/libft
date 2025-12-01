@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:57:10 by oguizol           #+#    #+#             */
-/*   Updated: 2025/12/01 19:09:43 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/12/01 17:26:08 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	get_line_fd(t_line *line)
 		if (readfd)
 		{
 			len = read(line->fd, readfd, BUFFER_SIZE);
-			if ((len < 0) || ((len == 0) && (*(line->line) == '\0')))
+			if (len < 0)
 				endli = delline(line, readfd);
 			else
 				endli = cutline(line, readfd, len);
@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 	return (line.line);
 }
 
-/*
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -137,11 +137,11 @@ int	main(void)
 	free(str);
 
 	close(fd);
-
+/*
 	printf("Avec fd -1: %s\n", get_next_line(-1));
 	printf("Avec fd 0: %s\n", get_next_line(0));
 	printf("Avec fd 1: %s\n", get_next_line(1));
 	printf("Avec fd 2: %s\n", get_next_line(2));
-	printf("Avec fd 3: %s\n", get_next_line(3));
+	printf("Avec fd 3: %s\n", get_next_line(3));*/
 	return (0);
-}*/
+}

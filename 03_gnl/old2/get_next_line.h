@@ -5,39 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 14:57:45 by oguizol           #+#    #+#             */
-/*   Updated: 2025/12/01 19:05:07 by oguizol          ###   ########.fr       */
+/*   Created: 2025/11/28 15:03:39 by oguizol           #+#    #+#             */
+/*   Updated: 2025/11/29 16:25:19 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 20
 # endif
 
 # include <unistd.h>
 # include <stdlib.h>
-/*TEMPO
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-//TEMPO FIN*/
+/*
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+*/
 
-typedef struct s_line
+typedef struct s_lstfd
 {
-	int		fd;
-	char	stash[BUFFER_SIZE + 1];
-	char	*line;
-}			t_line;
+	int				fd;
+	char			stash[BUFFER_SIZE + 1];
+	int				endofi;
+	struct s_lstfd	*next;
+}							t_lstfd;
 
 char	*get_next_line(int fd);
+char	*get_line(t_lstfd *node);
 char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
-void	get_line_fd(t_line *line);
-int		delline(t_line *line, char *str);
-int		cutline(t_line *line, char *readfd, size_t	len);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+int		cutline(t_lstfd *node, char **line);
+void	delnode(t_lstfd **list);
 #endif

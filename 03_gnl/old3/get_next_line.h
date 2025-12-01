@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:57:45 by oguizol           #+#    #+#             */
-/*   Updated: 2025/12/01 19:05:07 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/12/01 17:06:58 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-/*TEMPO
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-//TEMPO FIN*/
 
 typedef struct s_line
 {
 	int		fd;
-	char	stash[BUFFER_SIZE + 1];
+	char	stash[BUFFER_SIZE];
 	char	*line;
 }			t_line;
 
