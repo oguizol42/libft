@@ -6,7 +6,7 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:57:45 by oguizol           #+#    #+#             */
-/*   Updated: 2025/12/01 19:05:07 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/12/02 18:35:07 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-/*TEMPO
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-//TEMPO FIN*/
 
 typedef struct s_line
 {
 	int		fd;
-	char	stash[BUFFER_SIZE + 1];
+	char	*stash;
 	char	*line;
 }			t_line;
 
@@ -38,6 +32,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
 void	get_line_fd(t_line *line);
-int		delline(t_line *line, char *str);
-int		cutline(t_line *line, char *readfd, size_t	len);
+int		cutline(t_line *line, char *readfd, int len);
+int		deltline(t_line *tofree);
 #endif

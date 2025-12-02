@@ -6,75 +6,74 @@
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:57:10 by oguizol           #+#    #+#             */
-/*   Updated: 2025/12/01 19:09:43 by oguizol          ###   ########.fr       */
+/*   Updated: 2025/12/02 18:39:56 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	cutline(t_line *line, char *readfd, size_t	len)
+int	cutline(t_line *line, char *readfd, int len)
 {
-	char	*tmp;
+	char	*str;
+	char	*strfree;
 	int		i;
 
 	i = 0;
-	if ((len == 0) && (*(line->line) == '\0'))
-	{
-		delline(line, readfd);
-		return (1);
-	}
-	readfd[len] = '\0';
-	tmp = line->line;
-	line->line = ft_strjoin((line->line), readfd);
-	free(tmp);
+	str = NULL;
+	str = ft_strjoin(readfd, NULL);
+	strfree = line->line;
+	line->line = ft_strjoin(line->line, str);
+	free (strfree);
 	while (((line->line)[i] != '\0') && ((line->line)[i] != '\n'))
 		++i;
 	if (((line->line)[i] == '\0') && (len < BUFFER_SIZE))
-		return (1);
-	if ((line->line)[i] == '\0')
 		return (0);
-	ft_strlcat((line->stash), &((line->line)[i + 1]), (BUFFER_SIZE + 1));
+	if ((line->line)[i] == '\0')
+		return (1);
+	str = ft_strjoin(&((line->line)[i + 1]), NULL);
+	if (str)
+		line->stash = ft_strjoin (NULL, str);
 	(line->line)[i + 1] = '\0';
-	tmp = line->line;
-	line->line = ft_strjoin("", tmp);
-	return (1);
+	line->line = ft_strjoin (NULL, line->line);
+	return (0);
 }
 
-int	delline(t_line *line, char *str)
+int	deltline(t_line *tofree)
 {
-	free (str);
-	str = line->line;
-	free (str);
-	line->line = NULL;
-	*(line->stash) = '\0';
-	
-	return (1);
+	free (tofree->stash);
+	free (tofree->line);
+	tofree->stash = NULL;
+	tofree->line = NULL;
+	return (0);
 }
 
 void	get_line_fd(t_line *line)
 {
 	char	*readfd;
-	int		endli;
+	int		endofi;
 	int		len;
 
+	endofi = 1;
 	len = 0;
-	endli = 0;
-	line->line = ft_strjoin((line->stash), (line->line));
-	*(line->stash) = '\0';
-	while (!endli)
+	readfd = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!readfd)
 	{
-		readfd = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (readfd)
-		{
-			len = read(line->fd, readfd, BUFFER_SIZE);
-			if ((len < 0) || ((len == 0) && (*(line->line) == '\0')))
-				endli = delline(line, readfd);
-			else
-				endli = cutline(line, readfd, len);
-		}
-		else
-			delline(line, NULL);
+		endofi = cutline(line, readfd, len);
+		return ;
 	}
+	while (endofi)
+	{
+		len = read(line->fd, readfd, BUFFER_SIZE);
+		if ((len < 0) || ((len == 0) && ((line->line == NULL)
+					|| (*(line->line) == '\0'))))
+			endofi = deltline(line);
+		else
+		{
+			readfd[len] = '\0';
+			endofi = cutline(line, readfd, len);
+		}
+	}
+	free (readfd);
 }
 
 char	*get_next_line(int fd)
@@ -82,9 +81,15 @@ char	*get_next_line(int fd)
 	static t_line	line;
 
 	line.line = NULL;
-	if ((fd < 0) || (fd == 1) || (fd == 2) || (BUFFER_SIZE == 0))
+	if ((fd < 0) || (fd == 1) || (fd == 2) || (BUFFER_SIZE <= 0))
+	{
+		free(line.stash);
+		line.stash = NULL;
 		return (NULL);
+	}
 	line.fd = fd;
+	line.line = ft_strjoin(NULL, line.stash);
+	line.stash = NULL;
 	get_line_fd(&line);
 	return (line.line);
 }

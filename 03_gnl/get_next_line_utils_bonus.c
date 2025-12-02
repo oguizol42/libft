@@ -1,16 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oguizol <oguizol@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 15:02:21 by oguizol           #+#    #+#             */
-/*   Updated: 2025/11/29 12:34:53 by oguizol          ###   ########.fr       */
+/*   Created: 2025/12/01 14:58:10 by oguizol           #+#    #+#             */
+/*   Updated: 2025/12/02 19:51:34 by oguizol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*ptrjoin;
+	char	*tmp;
+	char	empty[1];
+	size_t	lens1;
+	size_t	lens2;
+
+	ptrjoin = NULL;
+	empty[0] = '\0';
+	if (!s1)
+		s1 = empty;
+	if (!s2)
+		s2 = empty;
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	ptrjoin = (char *)malloc(lens1 + lens2 + 1);
+	if (ptrjoin)
+	{
+		ft_strlcpy(ptrjoin, s1, lens1 + 1);
+		ft_strlcat(ptrjoin, s2, lens1 + lens2 + 1);
+	}
+	tmp = (char *)s2;
+	if (s2 != empty)
+		free (tmp);
+	return (ptrjoin);
+}
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -68,30 +96,16 @@ size_t	ft_strlen(const char *s)
 	return (count);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_line	*init_node(int fd)
 {
-	char	*ptrjoin;
-	char	*tofree;
-	char	empty[1];
-	size_t	lens1;
-	size_t	lens2;
+	t_line	*node;
 
-	ptrjoin = NULL;
-	empty[0] = '\0';
-	if (!s1)
-		s1 = empty;
-	if (!s2)
-		s2 = empty;
-	lens1 = ft_strlen(s1);
-	lens2 = ft_strlen(s2);
-	ptrjoin = (char *)malloc(lens1 + lens2 + 1);
-	if (ptrjoin)
-	{
-		ft_strlcpy(ptrjoin, s1, lens1 + 1);
-		ft_strlcat(ptrjoin, s2, lens1 + lens2 + 1);
-	}
-	tofree = (char *)s2;
-	free (tofree);
-	tofree = NULL;
-	return (ptrjoin);
+	node = (t_line *)malloc(sizeof(t_line));
+	if (!node)
+		return (NULL);
+	node->fd = fd;
+	node->stash = NULL;
+	node->line = NULL;
+	node->next = NULL;
+	return (node);
 }
